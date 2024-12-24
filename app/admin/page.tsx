@@ -1,55 +1,44 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { BookOpen, Users, GraduationCap, DollarSign } from "lucide-react";
+"use client";
+
+import { BookOpen, Users2, BookText } from "lucide-react";
+import { StatCard } from "@/components/admin/stats/stat-card"
+import { UserActivityChart } from "@/components/admin/charts/user-activity-chart"
+import { CourseEnrollmentsChart } from "@/components/admin/charts/course-enrollments-chart"
 
 export default function AdminDashboard() {
   return (
-    <div>
-      <h1 className="text-3xl font-bold mb-8">Dashboard Overview</h1>
-      
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Total Courses</CardTitle>
-            <BookOpen className="h-4 w-4 text-muted-foreground" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">25</div>
-            <p className="text-xs text-muted-foreground">+2 from last month</p>
-          </CardContent>
-        </Card>
+    <div className="space-y-8">
+      <div>
+        <h1 className="text-4xl font-bold mb-2">Welcome back, Admin!</h1>
+        <p className="text-muted-foreground text-lg">
+          Here&apos;s what&apos;s happening with your LMS today.
+        </p>
+      </div>
 
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Active Students</CardTitle>
-            <Users className="h-4 w-4 text-muted-foreground" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">1,234</div>
-            <p className="text-xs text-muted-foreground">+15% from last month</p>
-          </CardContent>
-        </Card>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <StatCard
+          icon={BookOpen}
+          label="Total Courses"
+          value="24"
+          subtext="4 pending approval"
+        />
+        <StatCard
+          icon={Users2}
+          label="Active Users"
+          value="1,234"
+          subtext="+12% this month"
+        />
+        <StatCard
+          icon={BookText}
+          label="Total Lessons"
+          value="156"
+          subtext="across all courses"
+        />
+      </div>
 
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Instructors</CardTitle>
-            <GraduationCap className="h-4 w-4 text-muted-foreground" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">12</div>
-            <p className="text-xs text-muted-foreground">+2 new this month</p>
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Revenue</CardTitle>
-            <DollarSign className="h-4 w-4 text-muted-foreground" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">$12,345</div>
-            <p className="text-xs text-muted-foreground">+8% from last month</p>
-          </CardContent>
-        </Card>
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <UserActivityChart />
+        <CourseEnrollmentsChart />
       </div>
     </div>
   );

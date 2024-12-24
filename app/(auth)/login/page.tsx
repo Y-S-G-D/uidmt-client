@@ -5,8 +5,9 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { useAuthStore } from "@/app/stores/auth-store";
+import { Mail, KeyRound } from "lucide-react";
 
 export default function LoginPage() {
 
@@ -24,46 +25,63 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center px-4">
-      <Card className="w-full max-w-md">
-        <CardHeader className="space-y-1">
-          <CardTitle className="text-2xl font-bold text-center">Login</CardTitle>
+    <div className="min-h-[90vh] w-full  flex items-center justify-center p-4 animate-gradient-x ">
+      {/* <div className="absolute top-16 inset-0 overflow-hidden">
+        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1534796636912-3b95b3ab5986?auto=format&fit=crop&q=80')] bg-cover bg-center opacity-60 "></div>
+      </div> */}
+      
+      <Card className="w-full max-w-md backdrop-blur-sm bg-white/10 border-white/20 shadow-2xl ">
+        <CardHeader className="space-y-1 text-center">
+          <CardTitle className="text-2xl font-bold tracking-tight text-white">Welcome back</CardTitle>
+          <CardDescription className="text-zinc-200">
+            Enter your credentials to access your account
+          </CardDescription>
         </CardHeader>
-        <CardContent>
-          <form onSubmit={handleSubmit} className="space-y-4">
+        <form onSubmit={handleSubmit}>
+          <CardContent className="space-y-4">
             <div className="space-y-2">
-              <Label htmlFor="email">Email</Label>
-              <Input
-                id="email"
-                type="email"
-                placeholder="Enter your email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-              />
+              <Label htmlFor="email" className="text-white">Email</Label>
+              <div className="relative">
+                <Mail className="absolute left-3 top-3 h-5 w-5 text-zinc-300" />
+                <Input
+                  id="email"
+                  placeholder="name@example.com"
+                  type="email"
+                  required
+                  className="pl-10 bg-white/5 border-white/10 text-white placeholder:text-zinc-400 focus:ring-2 focus:ring-purple-500 transition-all"
+                />
+              </div>
             </div>
             <div className="space-y-2">
-              <Label htmlFor="password">Password</Label>
-              <Input
-                id="password"
-                type="password"
-                placeholder="Enter your password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-              />
+              <Label htmlFor="password" className="text-white">Password</Label>
+              <div className="relative">
+                <KeyRound className="absolute left-3 top-3 h-5 w-5 text-zinc-300" />
+                <Input
+                  id="password"
+                  type="password"
+                  required
+                  className="pl-10 bg-white/5 border-white/10 text-white placeholder:text-zinc-400 focus:ring-2 focus:ring-purple-500 transition-all"
+                />
+              </div>
             </div>
-            <Button type="submit" className="w-full">
-              Sign In
+          </CardContent>
+          <CardFooter className="flex flex-col space-y-4">
+            <Button 
+              type="submit" 
+              className="w-full bg-gradient-to-r from-purple-500 to-blue-500 hover:from-purple-600 hover:to-blue-600 text-white transition-all duration-300 transform hover:scale-[1.02] disabled:opacity-50"
+              // disabled={isLoading}
+            >
+              {/* {isLoading ? "Signing in..." : "Sign in"} */}
+              Sign in
             </Button>
-          </form>
-          <div className="mt-4 text-center text-sm">
-            <span className="text-muted-foreground">Don&apos;t have an account? </span>
-            <Link href="/register" className="text-primary hover:underline">
-              Register
-            </Link>
-          </div>
-        </CardContent>
+            <p className="text-sm text-zinc-300 text-center">
+              Don&apos;t have an account?{' '}
+              <a href="/register" className="text-purple-300 hover:text-purple-200 underline underline-offset-4">
+                Sign up
+              </a>
+            </p>
+          </CardFooter>
+        </form>
       </Card>
     </div>
   );

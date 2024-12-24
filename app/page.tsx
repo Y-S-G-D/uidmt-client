@@ -7,21 +7,26 @@ import { courses } from "@/lib/courses";
 import { GraduationCap, BookOpen, Users, Star } from "lucide-react";
 import LogoSlider from "@/components/logo-slider";
 import Link from "next/link";
-import CountUp from "react-countup";
+// import CountUp from "react-countup";
 import { useInView } from "react-intersection-observer";
 import Stats from "@/components/stats"; 
 import BackgroundPattern from "@/components/background-pattern"; 
 import WhatWeServeSection from "@/components/homepage/what-we-serve-section"; 
 import TestimonialSection from "@/components/homepage/testimonial-section";
+import Poster from "@/components/homepage/poster-section";
+import Navbar from "@/components/navbar";
+import Footer from "@/components/footer";
 
 export default function Home() {
   const { ref, inView } = useInView({
     triggerOnce: true, // Animation will trigger only once
     threshold: 0.2, // Trigger when 20% of the section is visible
   });
-
+  
   return (
-    <div className="flex flex-col items-center box-border overflow-hidden">
+    <section>
+      <Navbar/>
+      <div className="flex flex-col items-center box-border overflow-hidden">
       <Hero />
       <div className="max-w-7xl mx-auto  w-full bg-gradient-to-br dark:from-gray-900">
         {/* Why Choose Us Section */}
@@ -69,6 +74,7 @@ export default function Home() {
         {/* Testimonials Section */}
         <TestimonialSection />
         <LogoSlider/>
+        <Poster/>
 
         {/* Call-to-Action Section */}
         <div className="my-12 bg-gradient-to-r dark:from-gray-900 py-12 text-center">
@@ -84,5 +90,8 @@ export default function Home() {
         </div>
       </div>
     </div>
-  );
+    <Footer/>
+
+    </section>
+      );
 }
