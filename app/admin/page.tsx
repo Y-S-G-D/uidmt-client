@@ -40,6 +40,7 @@ export default function AdminDashboard() {
         <UserActivityChart />
         <CourseEnrollmentsChart />
       </div>
+      <div className="h-screen"></div>
     </div>
   );
 }

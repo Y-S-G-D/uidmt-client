@@ -1,7 +1,5 @@
 "use client";
 
-import { useState } from "react";
-import { Button } from "@/components/ui/button";
 import {
   Table,
   TableBody,
@@ -10,101 +8,124 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { 
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import { Pencil, Trash2, Plus } from "lucide-react";
+import { UserAvatar } from "@/components/admin/user-avatar"
+import { StatusBadge } from "@/components/admin/status-badge";
+import { Search } from "lucide-react";
+import { useState } from "react";
+import { User } from "@/types/user";
 
-export default function AdminUsers() {
-  const [isDialogOpen, setIsDialogOpen] = useState(false);
+const users  = [
+  {
+    id: 1,
+    name: "John Doe",
+    email: "john@example.com",
+    avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop",
+    studentId: "STU001",
+    department: "Computer Science",
+    enrollmentDate: "2024-01-15",
+    status: "active",
+    lastActive: "2024-03-28",
+    completedCourses: 12,
+    currentGPA: 3.8,
+  },
+  {
+    id: 2,
+    name: "Sarah Wilson",
+    email: "sarah@example.com",
+    avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop",
+    studentId: "STU002",
+    department: "Business Administration",
+    enrollmentDate: "2024-02-01",
+    status: "active",
+    lastActive: "2024-03-27",
+    completedCourses: 8,
+    currentGPA: 3.5,
+  },
+  {
+    id: 3,
+    name: "Michael Chen",
+    email: "michael@example.com",
+    avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop",
+    studentId: "STU003",
+    department: "Engineering",
+    enrollmentDate: "2023-09-15",
+    status: "inactive",
+    lastActive: "2024-03-20",
+    completedCourses: 15,
+    currentGPA: 3.9,
+  },
+];
+
+export default function UsersTable() {
+  const [searchQuery, setSearchQuery] = useState("");
+
+  const filteredUsers = users.filter(
+    (user) =>
+      user.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      user.email.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      user.studentId.toLowerCase().includes(searchQuery.toLowerCase())
+  );
 
   return (
-    <div>
-      <div className="flex justify-between items-center mb-6">
-        <h1 className="text-3xl font-bold">Manage Users</h1>
-        <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-          <DialogTrigger asChild>
-            <Button>
-              <Plus className="mr-2 h-4 w-4" />
-              Add User
-            </Button>
-          </DialogTrigger>
-          <DialogContent>
-            <DialogHeader>
-              <DialogTitle>Add New User</DialogTitle>
-            </DialogHeader>
-            <div className="space-y-4 py-4">
-              <div className="space-y-2">
-                <Label htmlFor="name">Name</Label>
-                <Input id="name" placeholder="User name" />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="email">Email</Label>
-                <Input id="email" type="email" placeholder="user@example.com" />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="role">Role</Label>
-                <Select>
-                  <SelectTrigger>
-                    <SelectValue placeholder="Select role" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="student">Student</SelectItem>
-                    <SelectItem value="instructor">Instructor</SelectItem>
-                    <SelectItem value="admin">Admin</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
-              <Button className="w-full" onClick={() => setIsDialogOpen(false)}>
-                Create User
-              </Button>
-            </div>
-          </DialogContent>
-        </Dialog>
-      </div>
-
-      <div className="rounded-md border">
-        <Table>
-          <TableHeader>
-            <TableRow>
-              <TableHead>Name</TableHead>
-              <TableHead>Email</TableHead>
-              <TableHead>Role</TableHead>
-              <TableHead>Joined</TableHead>
-              <TableHead>Actions</TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            <TableRow>
-              <TableCell>John Doe</TableCell>
-              <TableCell>john@example.com</TableCell>
-              <TableCell>Student</TableCell>
-              <TableCell>Apr 23, 2024</TableCell>
-              <TableCell className="space-x-2">
-                <Button variant="ghost" size="icon">
-                  <Pencil className="h-4 w-4" />
-                </Button>
-                <Button variant="ghost" size="icon">
-                  <Trash2 className="h-4 w-4" />
-                </Button>
-              </TableCell>
-            </TableRow>
-          </TableBody>
-        </Table>
-      </div>
-    </div>
+    <Card className="w-full">
+      <CardHeader>
+        <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+          <CardTitle className="text-2xl font-bold">Students</CardTitle>
+          <div className="relative w-full sm:w-72">
+            <Search className="absolute left-2 top-2.5 h-4 w-4 text-muted-foreground" />
+            <Input
+              placeholder="Search students..."
+              className="pl-8"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+            />
+          </div>
+        </div>
+      </CardHeader>
+      <CardContent>
+        <div className="rounded-md border">
+          <Table>
+            <TableHeader>
+              <TableRow>
+                <TableHead>Student</TableHead>
+                <TableHead>Department</TableHead>
+                <TableHead>Status</TableHead>
+                <TableHead>Last Active</TableHead>
+                <TableHead className="text-right">GPA</TableHead>
+                <TableHead className="text-right">Completed Courses</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {filteredUsers.map((user) => (
+                <TableRow key={user.id}>
+                  <TableCell>
+                    <div className="flex items-center gap-3">
+                      <UserAvatar user={user as User} />
+                      <div>
+                        <div className="font-medium">{user.name}</div>
+                        <div className="text-sm text-muted-foreground">
+                          {user.studentId}
+                        </div>
+                      </div>
+                    </div>
+                  </TableCell>
+                  <TableCell>{user.department}</TableCell>
+                  <TableCell>
+                    <StatusBadge status={user.status as any} />
+                  </TableCell>
+                  <TableCell>{user.lastActive}</TableCell>
+                  <TableCell className="text-right">{user.currentGPA}</TableCell>
+                  <TableCell className="text-right">
+                    {user.completedCourses}
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </div>
+      </CardContent>
+    </Card>
   );
 }
