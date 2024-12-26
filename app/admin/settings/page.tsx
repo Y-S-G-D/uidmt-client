@@ -4,8 +4,8 @@ import { Card, CardHeader, CardContent } from "@/components/ui/card"; // ShadCN 
 
 export default function SettingsPage() {
   return (
-    <div className="p-6 max-w-4xl mx-auto">
-      <h1 className="text-2xl font-bold mb-4">Settings</h1>
+    <div className="p-6 w-full ">
+      <h1 className="text-3xl font-bold mb-8">Settings</h1>
       
       <Card className="mb-6">
         <CardHeader>
@@ -55,7 +55,7 @@ export default function SettingsPage() {
         </CardContent>
       </Card>
 
-      <div className="text-right">
+      <div className="text-left">
         <Button variant="default">Save Settings</Button>
       </div>
     </div>

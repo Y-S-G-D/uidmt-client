@@ -11,7 +11,6 @@ interface IAuthStore {
 }
 
 export const useAuthStore = create<IAuthStore>((set) => ({
-
     isAuthenticated: false,
     isProcessing:false,
     login: async (email, password) => {
