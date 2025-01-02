@@ -72,6 +72,14 @@ const config: Config = {
   			}
   		},
   		keyframes: {
+			scroll: {
+				'0%': { transform: 'translateX(0)' },
+				'100%': { transform: 'translateX(-50%)' },
+			  },
+			float: {
+				'0%, 100%': { transform: 'translateY(0)' },
+				'50%': { transform: 'translateY(-20px)' },
+			  },
   			blob: {
   				'0%': {
   					transform: 'translate(0px, 0px) scale(1)'
@@ -105,14 +113,6 @@ const config: Config = {
   					borderRadius: '60% 40% 30% 70%/60% 30% 70% 40%'
   				}
   			},
-  			scroll: {
-  				'0%': {
-  					transform: 'translateX(0%)'
-  				},
-  				'100%': {
-  					transform: 'translateX(-50%)'
-  				}
-  			},
   			'accordion-down': {
   				from: {
   					height: '0'
@@ -131,14 +131,21 @@ const config: Config = {
   			}
   		},
   		animation: {
-  			scroll: 'scroll 20s linear infinite',
-  			blob: 'blob 7s infinite',
+			float: 'float 3s ease-in-out infinite',
+        	'float-delay': 'float 3s ease-in-out infinite 1.5s',
+			scroll: 'scroll 40s linear infinite',
+			blob: 'blob 7s infinite',
   			'blob-spin': 'blob-spin 25s infinite linear',
   			'blob-morph': 'blob-morph 15s infinite',
   			'accordion-down': 'accordion-down 0.2s ease-out',
   			'accordion-up': 'accordion-up 0.2s ease-out'
   		}
   	}
+  },
+  variants: {
+    extend: {
+      animation: ['hover', 'focus'], // Add if you need specific states
+    },
   },
   plugins: [
     require('tailwindcss-animate'),

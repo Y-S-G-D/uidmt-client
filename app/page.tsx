@@ -12,10 +12,21 @@ import { useInView } from "react-intersection-observer";
 import Stats from "@/components/stats"; 
 import BackgroundPattern from "@/components/background-pattern"; 
 import WhatWeServeSection from "@/components/homepage/what-we-serve-section"; 
-import TestimonialSection from "@/components/homepage/testimonial-section";
+// import TestimonialSection from "@/components/homepage/testimonial-section";
 import Poster from "@/components/homepage/poster-section";
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
+import StarField from "@/components/homepage/StarField";
+import Navigation from "@/components/homepage/Navigation";
+import TrustBadge from "@/components/homepage/TrustBadge";
+import HeroContent from "@/components/homepage/HeroContent";
+import BackgroundHero from "@/components/homepage/background-hero";
+import StatSection from "@/components/homepage/stats/StatSection";
+import PopularCourseSection from "@/components/homepage/popular-course/popular-course-section";
+import { LogoMarquee } from "@/components/homepage/logo-marquee";
+import TrendingCourseSection from "@/components/homepage/trending-courses/tranding-course-section";
+import { TestimonialSection } from "@/components/homepage/testimonials/TestimonialSection";
+import { BackgroundElements } from "@/components/homepage/testimonials/background-element";
 
 export default function Home() {
   const { ref, inView } = useInView({
@@ -24,13 +35,41 @@ export default function Home() {
   });
   
   return (
-    <section>
-      <Navbar/>
-      <div className="flex flex-col items-center box-border overflow-hidden">
-      <Hero />
-      <div className="max-w-7xl mx-auto  w-full bg-gradient-to-br dark:from-gray-900">
-        {/* Why Choose Us Section */}
-      <div className="relative h-max py-10 bg-gray-900 flex flex-col items-center justify-center ">
+    <div className="min-h-screen overflow-hidden">
+      <Navigation />
+       
+      {/* Hero Section */}
+      <main className="relative z-10 pt-20 md:pt-32 px-4 md:px-6">
+        <StarField />
+        <BackgroundHero/>
+
+        <div className="max-w-7xl mx-auto">
+          <TrustBadge />
+          <HeroContent />
+        </div>
+      </main>
+      <div className="max-w-7xl mx-auto w-full">
+        <StatSection/>
+        <PopularCourseSection/>
+        <LogoMarquee/>
+        <TrendingCourseSection/>
+        <div className="relative">
+          <BackgroundElements/>
+        </div>
+        <TestimonialSection/>
+      </div>
+
+      <Footer />
+    </div>
+    
+      );
+}
+// <section>
+      // <Navbar/>
+      {/* <div className="flex flex-col items-center box-border overflow-hidden"> */}
+      {/* <Hero /> */}
+      {/* <div className="max-w-7xl mx-auto  w-full bg-gradient-to-br dark:from-gray-900"> */}
+      {/* <div className="relative h-max py-10 bg-gray-900 flex flex-col items-center justify-center ">
       <BackgroundPattern />
       <div className="relative z-10 w-full max-w-7xl mx-auto px-4">
         <h1 className="text-3xl md:text-5xl  font-bold text-white text-center leading-tight">
@@ -45,13 +84,13 @@ export default function Home() {
         
         <Stats />
       </div>
-    </div>
+    </div> */}
         
         {/* Features Section */}
-        <WhatWeServeSection/>
+        {/* <WhatWeServeSection/> */}
         
         {/* Featured Courses Section */}
-        <div className="my-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* <div className="my-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl text-center md:text-5xl font-bold text-gray-100 bg-clip-text uppercase mb-4">
             Featured 
             <span className="ml-4 bg-clip-text text-transparent bg-gradient-to-r from-purple-300 to-blue-400">Courses</span>
@@ -69,15 +108,15 @@ export default function Home() {
               />
             ))}
           </div>
-        </div>
+        </div> */}
 
         {/* Testimonials Section */}
-        <TestimonialSection />
+        {/* <TestimonialSection />
         <LogoSlider/>
-        <Poster/>
+        <Poster/> */}
 
         {/* Call-to-Action Section */}
-        <div className="my-12 bg-gradient-to-r dark:from-gray-900 py-12 text-center">
+        {/* <div className="my-12 bg-gradient-to-r dark:from-gray-900 py-12 text-center">
           <h2 className="text-3xl font-bold mb-4">Ready to Get Started?</h2>
           <p className="text-lg mb-6">
             Join thousands of students achieving their goals with our platform.
@@ -87,11 +126,9 @@ export default function Home() {
               Sign Up Now
             </Button>
           </Link>
-        </div>
-      </div>
-    </div>
-    <Footer/>
+        </div> */}
+      {/* </div> */}
+    {/* </div> */}
+    {/* <Footer/> */}
 
-    </section>
-      );
-}
+    // </section>
